@@ -17,6 +17,7 @@ jobs:
           base: master   # upstream branch
           head: master   # your fork branch
           merge_method: merge
+          ignore_fail: true
 
   build-and-release:
     runs-on: ubuntu-latest
