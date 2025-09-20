@@ -18,6 +18,8 @@ jobs:
           head: master   # your fork branch
           merge_method: merge
           ignore_fail: true
+          retry_after: 5
+          retries: 2
 
   build-and-release:
     runs-on: ubuntu-latest
