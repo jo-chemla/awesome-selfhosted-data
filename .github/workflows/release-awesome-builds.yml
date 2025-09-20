@@ -30,19 +30,20 @@ jobs:
       - name: Merge software/*.yml into software.json via yq
         uses: mikefarah/yq@master
         with:
-          cmd: yq ea '[.] as $item ireduce ([]; . *+ $item )' software/*.yml | yq -o=json -I 2 '{"softwares":.}' > software.json
+          # cmd: yq ea '[.] as $item ireduce ([]; . *+ $item )' software/*.yml | yq -o=json -I 2 '{"softwares":.}' > software.json
+          cmd: yq ea -o=json -I=2 "[.] as \$item ireduce ([]; . *+ \$item ) | {softwares: .}" software/*.yml > software.json
       - name: Raw dump software.json
         run: cat software.json
 
       - name: Get date for release
         id: date
-        run: echo "today=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+        run: echo "today=$(date +'%Y.%m.%d')" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.date.outputs.today }}
-          name: "Release ${{ steps.date.outputs.today }}"
+          name: "v${{ steps.date.outputs.today }}"
           files: software.json
 
       # - name: Release
