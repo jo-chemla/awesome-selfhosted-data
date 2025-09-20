@@ -1,21 +1,52 @@
 name: Release JSON for awesome-data builds
 
-on: push
+on:
+  schedule:
+    - cron: "0 3 * * *"    # daily at 03:00 UTC
+  workflow_dispatch:       # allow manual trigger
 
 jobs:
-  build:
+  sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
+      - name: Sync fork with upstream
+        uses: tgymnich/fork-sync@v1.8
+        with:
+          owner: jo-chemla
+          repo: awesome-selfhosted-data
+          base: master   # upstream branch
+          head: master   # your fork branch
+          merge_method: merge
+
+  build-and-release:
+    runs-on: ubuntu-latest
+    needs: sync
+    steps:
+      - name: Checkout fork
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Merge software/*.yml into software.json via yq
         uses: mikefarah/yq@master
         with:
           cmd: yq ea '[.] as $item ireduce ([]; . *+ $item )' software/*.yml | yq -o=json -I 2 '{"softwares":.}' > software.json
       - name: Raw dump software.json
         run: cat software.json
-      - name: Release
+
+      - name: Get date for release
+        id: date
+        run: echo "today=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
-        if: github.ref_type == 'tag'
         with:
+          tag_name: ${{ steps.date.outputs.today }}
+          name: "Release ${{ steps.date.outputs.today }}"
           files: software.json
+
+      # - name: Release
+      #   uses: softprops/action-gh-release@v2
+      #   if: github.ref_type == 'tag'
+      #   with:
+      #     files: software.json
