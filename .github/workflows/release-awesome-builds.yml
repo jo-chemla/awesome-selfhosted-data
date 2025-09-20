@@ -17,7 +17,7 @@ jobs:
           base: master   # upstream branch
           head: master   # your fork branch
           merge_method: merge
-          ignore_fail: true
+          ignore_fail: true # choose whether merge will fail if no new commits to pull and merge, or do one release per day no matter what
           retry_after: 5
           retries: 2
 
