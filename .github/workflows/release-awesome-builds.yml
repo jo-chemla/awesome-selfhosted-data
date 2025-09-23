@@ -17,7 +17,7 @@ jobs:
           base: master   # upstream branch
           head: master   # your fork branch
           merge_method: merge
-          ignore_fail: true # choose whether merge will fail if no new commits to pull and merge, or do one release per day no matter what
+          ignore_fail: false # choose whether merge will fail if no new commits to pull and merge, or do one release per day no matter what
           retry_after: 5
           retries: 2
 
@@ -40,8 +40,8 @@ jobs:
             yq ea '[.] as $item ireduce ([]; . *+ $item ) | {"platforms": .}' platforms/*.yml -o=json -I=2 > platforms.json
             yq ea -o=json -I=2 licenses-nonfree.yml > licenses-nonfree.json
             yq ea -o=json -I=2 licenses.yml > licenses.json
-      - name: Raw dump software.json
-        run: cat software.json
+      # - name: Raw dump software.json
+      #   run: cat software.json
 
       - name: Get date for release
         id: date
@@ -52,7 +52,8 @@ jobs:
         with:
           tag_name: ${{ steps.date.outputs.today }}
           name: "v${{ steps.date.outputs.today }}"
-          files: |
+          # files: *.json
+          files: | 
             software.json
             tags.json
             platforms.json
