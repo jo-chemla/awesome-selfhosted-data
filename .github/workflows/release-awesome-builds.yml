@@ -52,7 +52,12 @@ jobs:
         with:
           tag_name: ${{ steps.date.outputs.today }}
           name: "v${{ steps.date.outputs.today }}"
-          files: software.json
+          files: |
+            software.json
+            tags.json
+            platforms.json
+            licenses-nonfree.json
+            licenses.json
 
       # - name: Release
       #   uses: softprops/action-gh-release@v2
