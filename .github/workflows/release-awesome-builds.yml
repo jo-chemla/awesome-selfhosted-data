@@ -17,7 +17,7 @@ jobs:
           base: master   # upstream branch
           head: master   # your fork branch
           merge_method: merge
-          ignore_fail: false # choose whether merge will fail if no new commits to pull and merge, or do one release per day no matter what
+          ignore_fail: true # choose whether merge will fail if no new commits to pull and merge, or do one release per day no matter what
           retry_after: 5
           retries: 2
 
@@ -38,8 +38,10 @@ jobs:
             yq ea '[.] as $item ireduce ([]; . *+ $item ) | {"softwares": .}' software/*.yml -o=json -I=2 > software.json
             yq ea '[.] as $item ireduce ([]; . *+ $item ) | {"tags": .}' tags/*.yml -o=json -I=2 > tags.json
             yq ea '[.] as $item ireduce ([]; . *+ $item ) | {"platforms": .}' platforms/*.yml -o=json -I=2 > platforms.json
-            yq ea -o=json -I=2 licenses-nonfree.yml > licenses-nonfree.json
-            yq ea -o=json -I=2 licenses.yml > licenses.json
+            yq -o=json -I=2 '{\"licenses-nonfree\": .}' licenses-nonfree.yml > licenses-nonfree.json
+            yq -o=json -I=2 '{\"licenses\": .}' licenses.yml > licenses.json
+            # merge all
+            yq eval-all -p=json -o=json -I=2 '. as $item ireduce ({}; . * $item )' software.json tags.json platforms.json licenses-nonfree.json licenses.json > awesome-selfhosted-data.json
       # - name: Raw dump software.json
       #   run: cat software.json
 
