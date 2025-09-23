@@ -36,6 +36,10 @@ jobs:
           # cmd: yq ea '[.] as $item ireduce ([]; . *+ $item )' software/*.yml | yq -o=json -I 2 '{"softwares":.}' > software.json
           cmd: |
             yq ea '[.] as $item ireduce ([]; . *+ $item ) | {"softwares": .}' software/*.yml -o=json -I=2 > software.json
+            && yq ea '[.] as $item ireduce ([]; . *+ $item ) | {"tags": .}' tags/*.yml -o=json -I=2 > tags.json
+            && yq ea '[.] as $item ireduce ([]; . *+ $item ) | {"platforms": .}' platforms/*.yml -o=json -I=2 > platforms.json
+            && yq ea -o=json -I=2 licenses-nonfree.yml > licenses-nonfree.json
+            && yq ea -o=json -I=2 licenses.yml > licenses.json
       - name: Raw dump software.json
         run: cat software.json
 
