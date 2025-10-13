@@ -54,6 +54,8 @@ jobs:
         with:
           tag_name: ${{ steps.date.outputs.today }}
           name: "v${{ steps.date.outputs.today }}"
+          body: |
+            Download JSON data for latest release via this link: [awesome-selfhosted-data.json](https://github.com/jo-chemla/awesome-selfhosted-data/releases/latest/download/awesome-selfhosted-data.json)
           # files: *.json
           files: | 
             software.json
