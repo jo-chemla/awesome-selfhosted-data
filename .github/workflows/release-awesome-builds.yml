@@ -49,13 +49,27 @@ jobs:
         id: date
         run: echo "today=$(date +'%Y.%m.%d')" >> $GITHUB_OUTPUT
 
+      # Extend the JSON awesome-selfhosted-data.json to add eg added_date
+      - name: Download previous release JSON
+        run: |
+          curl https://github.com/jo-chemla/awesome-selfhosted-data/releases/latest/download/awesome-selfhosted-data-extended.json -o latest-release-awesome-selfhosted-data-extended.json
+      - name: Merge software/*.yml into software.json via yq
+        uses: mikefarah/yq@master
+        with:
+          cmd: |
+            yq eval-all '
+              . as $item ireduce ({}; . *+ {
+                "softwares": ($item.softwares | map(. + {"added-date": "2025-10-14"}))
+              })
+            ' latest-release-awesome-selfhosted-data-extended.json software.json > awesome-selfhosted-data-extended.json
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.date.outputs.today }}
           name: "v${{ steps.date.outputs.today }}"
           body: |
-            Download JSON data for latest release via this link: [awesome-selfhosted-data.json](https://github.com/jo-chemla/awesome-selfhosted-data/releases/latest/download/awesome-selfhosted-data.json)
+            Download JSON data for latest release via this link: [awesome-selfhosted-data.json](https://github.com/jo-chemla/awesome-selfhosted-data/releases/latest/download/awesome-selfhosted-data.json) and [awesome-selfhosted-data-extended.json](https://github.com/jo-chemla/awesome-selfhosted-data/releases/latest/download/awesome-selfhosted-data-extended.json)
           # files: *.json
           files: | 
             software.json
@@ -64,6 +78,7 @@ jobs:
             licenses-nonfree.json
             licenses.json
             awesome-selfhosted-data.json
+            awesome-selfhosted-data-extended.json
 
       # - name: Release
       #   uses: softprops/action-gh-release@v2
