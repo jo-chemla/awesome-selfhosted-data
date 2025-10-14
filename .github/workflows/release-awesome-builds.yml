@@ -59,7 +59,7 @@ jobs:
           cmd: |
             yq eval-all '
               . as $item ireduce ({}; . *+ {
-                "softwares": ($item.softwares | map(. + {"added-date": "${{ steps.date.outputs.today }}"}))
+                "softwares": ($item.softwares | map(. + {"added_date": "${{ steps.date.outputs.today }}"}))
               })
             ' latest-release-awesome-selfhosted-data-extended.json software.json > awesome-selfhosted-data-extended.json
 
