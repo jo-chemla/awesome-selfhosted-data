@@ -92,4 +92,3 @@ jobs:
       #   if: github.ref_type == 'tag'
       #   with:
       #     files: software.json
-Merge pull request #40 from awesome-selfhosted/master · jo-chemla/awesome-selfhosted-data@c2e87e3
