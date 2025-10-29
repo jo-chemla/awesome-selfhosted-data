@@ -59,10 +59,18 @@ jobs:
           cmd: |
             yq eval-all '
               . as $item ireduce ({}; . *+ {
-                "softwares": ($item.softwares | map(. + {"added_date": "${{ steps.date.outputs.today }}"}))
+                "softwares": ($item.softwares | map(
+                  . *n {"added_date": "${{ steps.date.outputs.today }}"}
+                ))
               })
             ' latest-release-awesome-selfhosted-data-extended.json software.json > awesome-selfhosted-data-extended.json
-
+            # # Could also add star_history if GitHub link found via below procedure inside the map, piped after adding added_date
+            # |
+            # (.source_code_url // .website_url // "") as $url |
+            # if ($url | test("github.com"))
+            # then . *n {"star_history": ("https://api.star-history.com/svg?repos=" + ($url | sub("https?://github.com/"; "") | sub("/$"; "")) + "&type=Date")}
+            # else .
+            # end
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
@@ -79,9 +87,9 @@ jobs:
             licenses.json
             awesome-selfhosted-data.json
             awesome-selfhosted-data-extended.json
-
       # - name: Release
       #   uses: softprops/action-gh-release@v2
       #   if: github.ref_type == 'tag'
       #   with:
       #     files: software.json
+Merge pull request #40 from awesome-selfhosted/master · jo-chemla/awesome-selfhosted-data@c2e87e3
