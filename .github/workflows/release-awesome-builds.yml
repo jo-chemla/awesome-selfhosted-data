@@ -60,7 +60,7 @@ jobs:
             yq eval-all '
               . as $item ireduce ({}; . *+ {
                 "softwares": ($item.softwares | map(
-                  . *n {"added_date": "${{ steps.date.outputs.today }}"}
+                  {"added_date": "${{ steps.date.outputs.today }}"} * .
                 ))
               })
             ' latest-release-awesome-selfhosted-data-extended.json software.json > awesome-selfhosted-data-extended.json
