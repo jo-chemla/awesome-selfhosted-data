@@ -59,9 +59,10 @@ jobs:
           cmd: |
             yq eval-all '
               . as $item ireduce ({}; . *+ {
-                "softwares": ($item.softwares | map(
-                  {"added_date": "${{ steps.date.outputs.today }}"} * .
-                ))
+                "softwares": (
+                  $item.softwares
+                  | map( . *n {"added_date": "${{ steps.date.outputs.today }}"} )
+                )
               })
             ' latest-release-awesome-selfhosted-data-extended.json software.json > awesome-selfhosted-data-extended.json
             # # Could also add star_history if GitHub link found via below procedure inside the map, piped after adding added_date
