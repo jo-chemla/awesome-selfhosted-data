@@ -57,14 +57,13 @@ jobs:
         uses: mikefarah/yq@master
         with:
           cmd: |
-            yq eval-all '
-              . as $item ireduce ({}; . *+ {
-                "softwares": (
-                  $item.softwares
-                  | map( . *n {"added_date": "${{ steps.date.outputs.today }}"} )
-                )
-              })
-            ' latest-release-awesome-selfhosted-data-extended.json software.json > awesome-selfhosted-data-extended.json
+            yq -p=json -o=json '
+              .softwares |= map(
+                . as $new |
+                (load("latest-release-awesome-selfhosted-data-extended.json").softwares // [] | map(select(.name == $new.name)) | .[0].added_date) as $existing_date |
+                . + {"added_date": ($existing_date // "${{ steps.date.outputs.today }}")}
+              )
+            ' software.json > awesome-selfhosted-data-extended.json
             # # Could also add star_history if GitHub link found via below procedure inside the map, piped after adding added_date
             # |
             # (.source_code_url // .website_url // "") as $url |
@@ -72,6 +71,14 @@ jobs:
             # then . *n {"star_history": ("https://api.star-history.com/svg?repos=" + ($url | sub("https?://github.com/"; "") | sub("/$"; "")) + "&type=Date")}
             # else .
             # end
+            # not managed to make below command work
+            # yq eval-all '
+            #   . as $item ireduce ({}; . *+ {
+            #     "softwares": (
+            #       $item.softwares
+            #       | map( . *n {"added_date": "${{ steps.date.outputs.today }}"} )
+            #     )
+            #   })
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
