@@ -9,13 +9,21 @@ platforms:
 tags:
   - Communication - Email - Complete Solutions
 source_code_url: https://github.com/anonaddy/anonaddy
-stargazers_count: 4213
+stargazers_count: 4212
 updated_at: '2025-10-16'
 archived: false
 current_release:
   tag: v1.3.5
   published_at: '2025-07-29'
 commit_history:
+  2024-12: 1
+  2025-01: 2
+  2025-02: 3
+  2025-03: 0
+  2025-04: 1
+  2025-05: 3
+  2025-06: 1
+  2025-07: 5
   2025-08: 1
   2025-09: 3
   2025-10: 2

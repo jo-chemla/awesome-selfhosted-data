@@ -9,13 +9,21 @@ platforms:
 tags:
   - Software Development - IDE & Tools
 source_code_url: https://github.com/Atheos/Atheos
-stargazers_count: 631
+stargazers_count: 630
 updated_at: '2025-09-03'
 archived: false
 current_release:
   tag: v601
   published_at: '2025-01-10'
 commit_history:
+  2024-12: 0
+  2025-01: 13
+  2025-02: 0
+  2025-03: 0
+  2025-04: 0
+  2025-05: 13
+  2025-06: 15
+  2025-07: 0
   2025-08: 0
   2025-09: 2
   2025-10: 0
