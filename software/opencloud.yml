@@ -1,0 +1,22 @@
+name: OpenCloud
+website_url: https://docs.opencloud.eu/
+source_code_url: https://github.com/opencloud-eu/opencloud
+description: File Sharing and Collaboration Platform.
+licenses:
+  - Apache-2.0
+platforms:
+  - Docker
+  - Go
+  - Nodejs
+tags:
+  - File Transfer & Synchronization
+stargazers_count: 4288
+updated_at: '2025-12-04'
+archived: false
+current_release:
+  tag: v4.0.0
+  published_at: '2025-12-01'
+commit_history:
+  2025-10: 82
+  2025-11: 140
+  2025-12: 10
