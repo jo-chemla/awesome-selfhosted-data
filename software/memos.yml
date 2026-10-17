@@ -10,22 +10,23 @@ tags:
   - Note-taking & Editors
 source_code_url: https://github.com/usememos/memos
 demo_url: https://demo.usememos.com/explore
-stargazers_count: 47457
-updated_at: '2025-12-24'
+icon_url: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/memos.webp
+stargazers_count: 63850
+updated_at: '2026-10-16'
 archived: false
 current_release:
-  tag: v0.25.3
-  published_at: '2025-11-25'
+  tag: 26.10-rc.1
+  published_at: '2026-10-09'
 commit_history:
-  2025-01: 61
-  2025-02: 136
-  2025-03: 73
-  2025-04: 50
-  2025-05: 67
-  2025-06: 82
-  2025-07: 118
-  2025-08: 60
-  2025-09: 25
-  2025-10: 76
   2025-11: 88
-  2025-12: 65
+  2025-12: 100
+  2026-01: 113
+  2026-02: 67
+  2026-03: 106
+  2026-04: 88
+  2026-05: 47
+  2026-06: 51
+  2026-07: 77
+  2026-08: 77
+  2026-09: 107
+  2026-10: 48

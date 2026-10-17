@@ -9,22 +9,23 @@ platforms:
   - C++
 tags:
   - Internet of Things (IoT)
-stargazers_count: 23974
-updated_at: '2025-12-24'
+icon_url: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/tasmota.webp
+stargazers_count: 24863
+updated_at: '2026-10-16'
 archived: false
 current_release:
-  tag: v15.2.0
-  published_at: '2025-12-12'
+  tag: v16.0.0
+  published_at: '2026-10-16'
 commit_history:
-  2025-01: 77
-  2025-02: 120
-  2025-03: 72
-  2025-04: 62
-  2025-05: 84
-  2025-06: 57
-  2025-07: 104
-  2025-08: 73
-  2025-09: 81
-  2025-10: 77
   2025-11: 63
-  2025-12: 61
+  2025-12: 76
+  2026-01: 72
+  2026-02: 68
+  2026-03: 69
+  2026-04: 60
+  2026-05: 86
+  2026-06: 42
+  2026-07: 35
+  2026-08: 75
+  2026-09: 91
+  2026-10: 78

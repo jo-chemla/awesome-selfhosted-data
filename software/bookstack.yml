@@ -8,24 +8,6 @@ platforms:
   - Docker
 tags:
   - Wikis
-source_code_url: https://github.com/BookStackApp/BookStack
+source_code_url: https://codeberg.org/bookstack/bookstack
 demo_url: https://www.bookstackapp.com/#demo
-stargazers_count: 17929
-updated_at: '2025-12-24'
-archived: false
-current_release:
-  tag: v25.12
-  published_at: '2025-12-24'
-commit_history:
-  2025-01: 31
-  2025-02: 41
-  2025-03: 14
-  2025-04: 21
-  2025-05: 52
-  2025-06: 25
-  2025-07: 46
-  2025-08: 34
-  2025-09: 18
-  2025-10: 33
-  2025-11: 37
-  2025-12: 46
+icon_url: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/bookstack.webp
